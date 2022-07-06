@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="greet.js"></script>
+    <script src="enoughairtime.js"></script>
+    <script src="greet.widget.js" defer> </script>
+    <script src="isFromGauteng.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+  
+    <style>
+
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: lightgray;
+        }
+        .message {
+            padding: 1m;
+            background-color: aqua;
+            margin-bottom: 1m;
+
+        }
+
+        .input>label {
+            display: inline-block;
+            width: 15em;
+            padding: 0.5em;
+            margin: 0.5em;
+            font-weight: bold;
+        }
+
+
+        .input>label [type="text"] {
+
+            font-weight: bold;
+            padding: 0.5em;
+            margin: 0.5em;
+        }
+
+        .widgets {
+            display: flex;
+        }
+        
+        .widget{
+            flex: 1;
+            border: 3px solid blue;
+            margin: 1em;
+            padding: 1em;
+            border-radius: 0.5em;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <h1> My Widgets</h1>
+    <div calss="widgets">
+
+        <div class="widget"  x-data="greetWidget">
+            <h2>Greet Widget</h2>
+            <div class="message" x-text="message">
+                You will greeted here
+            </div>
+
+            <label for="name">Please Enter Your Name:</label>
+            <input type="text" x-model="name" id="name">
+            <button x-on:click="greetMe">Greet</button>
+        </div>
+
+
+            <div class="widget" x-data="{
+carnumber: 0,
+carmessage : '',
+fromgauteng () {
+
+    const: carfrom = isFromGauteng(this.carnumber);
+    console.log (carmessage);
+    this.message = this.carfrom;
+
+}
+            }" >
+
+
+            
+
+                <h2> this is form Gauteng </h2>
+                <div class="input">
+                    <label for="numberplate">Please Enter The car number:</label>
+                    <input type="text" x-model="carnumber" id="numberplate">
+    
+                </div>
+                <div class="message" x-text="carmessage">
+                   This car is from 
+                </div>
+
+                <div>
+                    <button x-on:click="fromgauteng">check</button>
+                </div>
+            </div>
+        
+
+
+        <div class="widget" x-data="{
+    airtimeUsage : '' ,
+    availableAmount: '0.00' ,
+    airtimeMessage :'',
+    calculate () {
+      this.airtimeMessage = enoughairtime(this.airtimeUsage, this.availableAmount)
+    }
+}">
+
+
+
+            <h2> Airtime</h2>
+            <div class="input">
+                <label for="usage">Please Enter Your Airtime usge:</label>
+                <input type="text" x-model="airtimeUsage" id="usage">
+
+            </div>
+
+            <div class="input">
+                <label for="amount">Your Availbe Amount :</label>
+                <input type="text" x-model="availableAmount" id="amount">
+
+            </div>
+
+            <div class="message" x-text="airtimeMessage">
+                Airtime amount left display here
+            </div>
+            <div>
+                <button x-on:click="calculate">Calculate Airtime Usage</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
